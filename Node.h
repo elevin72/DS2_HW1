@@ -25,6 +25,7 @@ class Node {
             std::cout << ++nodeCount << "\n";
         }
         ~Node(){
+            std::cout << --nodeCount << "\n";
         }
         bool operator==(Node n){ return (this->_content.compare(n._content)); }
         std::string GetContent(){return _content; }

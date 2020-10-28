@@ -16,10 +16,11 @@ DiscussionTree::DiscussionTree() {
 
 
 DiscussionTree::DiscussionTree(std::string s) {
-    _root = new Node(s);
+    Node newNode(s);
+    _root = &newNode; // don't believe this works. newNode is local
 }
 
-DiscussionTree::~Discussionree(){
+DiscussionTree::~DiscussionTree(){
     delete _root;
 }
 

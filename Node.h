@@ -7,7 +7,7 @@
 
 class Node {
     public:
-        typedef std::list<Node*> list;
+        typedef std::list<Node> list;
 
         //fields
         list _responseList;
@@ -24,14 +24,7 @@ class Node {
             _parent = nullptr; 
             std::cout << ++nodeCount << "\n";
         }
-        ~Node(){  
-            for(auto it = _responseList.begin();
-                    it != _responseList.end();
-                    it++) {
-                delete (*it);
-            }
-            std::cout << --nodeCount << "\n";
-
+        ~Node(){
         }
         bool operator==(Node n){ return (this->_content.compare(n._content)); }
         std::string GetContent(){return _content; }

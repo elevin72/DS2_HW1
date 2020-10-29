@@ -19,7 +19,7 @@ DiscussionTree::DiscussionTree(std::string s) {
     _root = new Node(s);
 }
 
-DiscussionTree::~Discussionree(){
+DiscussionTree::~DiscussionTree(){
     delete _root;
 }
 

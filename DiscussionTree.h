@@ -7,14 +7,14 @@
 class DiscussionTree {
 
     public: 
-        //typedef Node::list::iterator it;
+        /* typedef Node::list::iterator iter; */
         Node* _root;
          
         DiscussionTree(); 
         DiscussionTree(std::string);
         Node* Find(std::string s);
         bool AddNode(std::string, std::string); // false if first string does not exist
-        void DeleteFromNode(std::string);
+        void Delete(std::string);
         void Print();
         void PrintDiscussionPath(std::string);
         void PrintFromNode(std::string);
@@ -22,10 +22,8 @@ class DiscussionTree {
         ~DiscussionTree();
     private: 
         Node* Find(std::string s, Node::list& responses);
-        void DeleteFromList(Node::list toDelete);
+        /* void DeleteFromList(Node::list toDelete); */
         bool StringCompare(std::string s1, std::string s2);
-        void Print(std::string, Node::list currentList);
-
-
+        void Print(std::string, Node::list& currentList);
 };
 #endif

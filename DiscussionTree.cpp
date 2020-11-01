@@ -16,8 +16,8 @@ DiscussionTree::DiscussionTree() {
 
 
 DiscussionTree::DiscussionTree(std::string s) {
-    Node newNode(s);
-    _root = &newNode; // don't believe this works. newNode is local
+    Node* newNode = new Node(s);  // Some memory management is neccesary after all
+    _root = newNode; // don't believe this works. newNode is local
 }
 
 DiscussionTree::~DiscussionTree(){
@@ -34,15 +34,17 @@ Node* DiscussionTree::Find(std::string s){
 }
 
 Node* DiscussionTree::Find(std::string s, Node::list& responses){
-    for (Node::list::iterator it = responses.begin(); it != responses.end(); ++it){
-        if ((*it)->_content.compare(s) == 0){ 
-            return *it;
+    auto end = responses.end();
+    for (auto it = responses.begin(); it != end; it++) {
+        if (it->_content.compare(s) == 0){ 
+            return &(*it);  // very ugly
        }
-       Node* n = Find(s, (*it)->_responseList);
+       Node* n = Find(s, it->_responseList); // search recursivly in childrens list
        if (n != nullptr) {
            return n;
        }
     }
+    // node was not found and therefore...
     return nullptr;
 }
 
@@ -51,20 +53,25 @@ bool DiscussionTree::AddNode(std::string parentString, std::string childString){
     if (parentNode == nullptr) {
        return false; 
     }
-    Node* childNode = new Node(childString);
+    Node childNode(childString);
+    childNode._parent = parentNode;
     parentNode->_responseList.push_back(childNode);
-    parentNode->_responseList.back()->_parent = parentNode;
     return true;
 }
 
-void DiscussionTree::DeleteFromNode(std::string s) {
-    Node* n = Find(s, _root->_responseList);
-    n->_parent->_responseList.remove(n); // remove from list
-    delete n; // And now delete the element
+void DiscussionTree::Delete(std::string s) {
+    Node* n = Find(s);
+    if (n == _root){
+        delete _root;
+        return;
+    }
+    n->_parent->_responseList.remove(*n); // remove from list
+    // if remove works like I think it does than destructors get called on all subsequent nodes
 }
 
 void DiscussionTree::Print(){
     std::cout << _root->_content << "\n";
+    std::cout << ( _root->_responseList.empty() ? "is empty\n" : "is not empty\n"); // why is not empty?? It should be empty!!
     Print("    ", _root->_responseList);
 }
 
@@ -74,12 +81,12 @@ void DiscussionTree::PrintFromNode(std::string s ){
     Print("    ", n->_responseList);
 }
 
-void DiscussionTree::Print(std::string space, Node::list currentList){
+void DiscussionTree::Print(std::string space, Node::list& currentList){
     for(auto it = currentList.begin();
             it != currentList.end();
             it++) {
-        std::cout << space +(*it)->_content << "\n";
-        Print(space + "    ", (*it)->_responseList);
+        std::cout << space + it->_content << "\n";
+        Print(space + "    ", it->_responseList);
     }
 }
 
@@ -91,7 +98,7 @@ void DiscussionTree::PrintDiscussionPath(std::string s) {
     } while (n != nullptr);
 }
 
-/* bool DiscussionTree::operator==(DiscussionTree  d){ */
-/*    return ( _root == d._root ); */ 
-/* } */
+bool DiscussionTree::operator==(DiscussionTree d){
+    return (_root == d._root);
+}
 #endif

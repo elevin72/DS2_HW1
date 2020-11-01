@@ -18,17 +18,18 @@ class Node {
         static int nodeCount;
         Node(){ _content = ""; 
             _parent = nullptr;
+            _responseList.clear();
             std::cout << ++nodeCount << "\n";
         }
         Node(std::string content) : _content(content) {
             _parent = nullptr; 
+            _responseList.clear();
             std::cout << ++nodeCount << "\n";
         }
         ~Node(){
             std::cout << --nodeCount << "\n";
         }
         bool operator==(Node n){ return (this->_content.compare(n._content)); }
-        std::string GetContent(){return _content; }
     private:
 };
 

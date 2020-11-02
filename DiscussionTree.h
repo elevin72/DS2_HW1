@@ -1,4 +1,3 @@
-// TODO: add error handling?
 #ifndef DISCUSSIONTREE_H
 #define DISCUSSIONTREE_H
 
@@ -7,7 +6,8 @@
 class DiscussionTree {
 
     public: 
-        //typedef Node::list::iterator it;
+        static int count;
+
         Node* _root;
          
         DiscussionTree(); 
@@ -25,7 +25,5 @@ class DiscussionTree {
         void DeleteFromList(Node::list toDelete);
         bool StringCompare(std::string s1, std::string s2);
         void Print(std::string, Node::list currentList);
-
-
 };
 #endif

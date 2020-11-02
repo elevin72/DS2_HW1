@@ -1,4 +1,3 @@
-// Before submission move function definitions over to Node.cpp
 #ifndef NODE_H
 #define NODE_H
 #include <iostream>
@@ -7,6 +6,7 @@
 
 class Node {
     public:
+        static int count;
         typedef std::list<Node*> list;
 
         //fields
@@ -15,27 +15,10 @@ class Node {
         std::string _content;
 
         //methods
-        static int nodeCount;
-        Node(){ _content = ""; 
-            _parent = nullptr;
-            std::cout << ++nodeCount << "\n";
-        }
-        Node(std::string content) : _content(content) {
-            _parent = nullptr; 
-            std::cout << ++nodeCount << "\n";
-        }
-        ~Node(){  
-            for(auto it = _responseList.begin();
-                    it != _responseList.end();
-                    it++) {
-                delete (*it);
-            }
-            std::cout << --nodeCount << "\n";
-
-        }
-        bool operator==(Node n){ return (this->_content.compare(n._content)); }
-        std::string GetContent(){return _content; }
-    private:
+        Node();
+        Node(std::string content);
+        ~Node();
+        bool operator==(Node);
 };
 
 #endif

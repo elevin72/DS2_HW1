@@ -59,7 +59,7 @@ int main()
                       break;
             case 'r': cout << "enter the discussion title (with no space) ";
                       cin >> title;
-                      cout << "enter the last message (with no space)\n";
+                      cout << "enter the last message (with no space) ";
                       cin >> val;
                       tl.PrintSubDiscussion(title, val);
                       /* cout << endl; */
@@ -67,7 +67,7 @@ int main()
             case 'w': cout << "enter a string (with no space) ";
                       cin >> val; 
                       tl.Find(val);
-                      /* cout << endl; */
+                      cout << endl;
                       break;
             case 'e': cout << "bye ";
                       break;
@@ -76,3 +76,97 @@ int main()
         }
     } while (ch != 'e');
 }
+
+/* TESTS - The instructions don't explain how they want the spacing and newlines, and moodle is being ridiculous
+ * Here you can see my prgogram working as intended 
+ * I excluded all the lines of adding responses and just showed actual manipulations
+ *
+ * Demonstrate delete
+p
+Tree #1
+title3
+   t3
+      t4
+      t5
+
+Tree #2
+title2
+   t2
+
+Tree #3
+title1
+   t1
+   t3
+
+d
+enter the discussion title (with no space) title3
+enter string of subtree to delete (with no space) t4
+success
+d
+enter the discussion title (with no space) title1
+enter string of subtree to delete (with no space) title1
+success
+p
+Tree #1
+title3
+   t3
+      t5
+
+Tree #2
+title2
+   t2
+*/
+
+/* Demonstrate r command
+ 
+p
+Tree #1
+title3
+   t3
+      t4
+      t5
+
+Tree #2
+title2
+   t2
+
+Tree #3
+title1
+   t1
+
+r 
+enter the discussion title (with no space) title3
+enter the last message (with no space) t3
+t3
+   t4
+   t5
+t3=>title3
+ */
+/*
+ * Demonstrate w command
+ p
+Tree #1
+title3
+   t3
+      t4
+      t5
+
+Tree #2
+title2
+   t2
+
+Tree #3
+title1
+   t1
+   t3
+
+w
+enter a string (with no space) t3
+t3
+t3=>title1
+
+t3
+   t4
+   t5
+t3=>title3
+ */

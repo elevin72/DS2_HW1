@@ -6,8 +6,6 @@
 class DiscussionTree {
 
     public: 
-        static int count;
-
         Node* _root;
          
         DiscussionTree(); 

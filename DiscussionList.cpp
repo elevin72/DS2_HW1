@@ -34,7 +34,6 @@ void DiscussionList::Find(std::string s) {
             it++) {
         (*it)->PrintFromNode(s);
         (*it)->PrintDiscussionPath(s);
-        std::cout << "\n";
     }
 }
 
@@ -64,8 +63,8 @@ bool DiscussionList::DeleteResponse(std::string rootString, std::string toDelete
             else {
                 (*it)->DeleteFromNode(toDelete);
             }
+            return true; // whether it was root or not, we still succesfully deleted something
         }
-        return true; // whether it was root or not, we still succesfully deleted something
     }
     return false;
 }

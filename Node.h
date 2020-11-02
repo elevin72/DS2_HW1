@@ -6,7 +6,6 @@
 
 class Node {
     public:
-        static int count;
         typedef std::list<Node*> list;
 
         //fields

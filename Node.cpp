@@ -1,16 +1,12 @@
 #include "Node.h"
 
-int Node::count = 0;
-
 Node::Node() { 
     _content = ""; 
     _parent = NULL;
-    std::cout << ++count << " nodes\n";
 }
 
 Node::Node(std::string content) : _content(content) {
     _parent = NULL; 
-    std::cout << ++count << " nodes\n";
 }
 
 // go through all nodes that are children to this and delete them as well
@@ -22,7 +18,6 @@ Node::~Node(){
             it++) {
         delete (*it);
     }
-    std::cout << --count << " nodes\n";
 }
 
 bool Node::operator==(Node n){ 

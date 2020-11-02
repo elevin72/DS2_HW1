@@ -7,22 +7,18 @@
 //  the list, with an iterator, the proper syntax for accessing members of the Node is:  
 //  (*iterator)->member  -- i.e. must be dereferenced twice
 
-int DiscussionTree::count = 0;
 
 DiscussionTree::DiscussionTree() {
     _root = NULL;
-    std::cout << ++count << " trees\n";
 }
 
 
 DiscussionTree::DiscussionTree(std::string s) {
     _root = new Node(s);
-    std::cout << ++count << " trees\n";
 }
 
 DiscussionTree::~DiscussionTree() {
     delete _root;
-    std::cout << --count << " trees\n";
 }
 
 Node* DiscussionTree::Find(std::string s){
@@ -79,7 +75,6 @@ void DiscussionTree::PrintFromNode(std::string s ){
     }
     std::cout << n->_content << "\n";
     Print("   ", n->_responseList);
-    std::cout << "\n";
 }
 
 void DiscussionTree::Print(std::string space, Node::list currentList){

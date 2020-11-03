@@ -62,7 +62,7 @@ int main()
                       cout << "enter the last message (with no space) ";
                       cin >> val;
                       tl.PrintSubDiscussion(title, val);
-                      /* cout << endl; */
+                      cout << endl;
                       break;
             case 'w': cout << "enter a string (with no space) ";
                       cin >> val; 

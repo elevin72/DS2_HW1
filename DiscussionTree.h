@@ -12,7 +12,7 @@ class DiscussionTree {
         DiscussionTree(std::string);
         Node* Find(std::string s);
         bool AddNode(std::string, std::string); // false if first string does not exist
-        void DeleteFromNode(std::string);
+        bool DeleteFromNode(std::string);
         void Print();
         void PrintDiscussionPath(std::string);
         void PrintFromNode(std::string);

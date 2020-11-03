@@ -54,13 +54,14 @@ bool DiscussionTree::AddNode(std::string parentString, std::string childString) 
     return true;
 }
 
-void DiscussionTree::DeleteFromNode(std::string s) {
+bool DiscussionTree::DeleteFromNode(std::string s) {
     Node* n = Find(s);
     if (n == NULL) {
-        return;
+        return false;
     }
     n->_parent->_responseList.remove(n); // remove from list
     delete n; // And now delete the element
+    return true;
 }
 
 void DiscussionTree::Print(){
@@ -73,7 +74,7 @@ void DiscussionTree::PrintFromNode(std::string s ){
     if (n == NULL) {
         return;
     }
-    std::cout << n->_content << "\n";
+    std::cout << "\n" << n->_content << "\n";
     Print("   ", n->_responseList);
 }
 
@@ -96,7 +97,6 @@ void DiscussionTree::PrintDiscussionPath(std::string s) {
         }
         n = n->_parent;
     } 
-    std::cout << "\n";
 }
 
 bool DiscussionTree::operator==(DiscussionTree d){

@@ -29,11 +29,19 @@ void DiscussionList::AddDiscussion(std::string s) {
 // }
 
 void DiscussionList::Find(std::string s) {
-    for(iter it =_discussionList.begin();
-            it != _discussionList.end();
+    bool isPresent = false;
+    std::list<DiscussionTree*>::reverse_iterator end = _discussionList.rend();
+    for(std::list<DiscussionTree*>::reverse_iterator it =_discussionList.rbegin();
+            it != end;
             it++) {
+        if((*it)->Find(s) != NULL) {
+            isPresent = true;
+        }
         (*it)->PrintFromNode(s);
         (*it)->PrintDiscussionPath(s);
+    }
+    if(!isPresent) {
+        std::cout << "ERROR\n";
     }
 }
 
@@ -59,11 +67,11 @@ bool DiscussionList::DeleteResponse(std::string rootString, std::string toDelete
                 DiscussionTree* dt = *it;
                 _discussionList.remove(dt);
                 delete dt; 
+                return true;
             }
             else {
-                (*it)->DeleteFromNode(toDelete);
+                return (*it)->DeleteFromNode(toDelete);
             }
-            return true; // whether it was root or not, we still succesfully deleted something
         }
     }
     return false;
@@ -102,7 +110,7 @@ bool DiscussionList::PrintSubDiscussion(std::string rootString, std::string toPr
             it++) {
         if ((*it)->_root->_content == rootString) {
             (*it)->PrintFromNode(toPrint);
-            (*it)->PrintDiscussionPath(toPrint);
+            //(*it)->PrintDiscussionPath(toPrint);
             return true;
         }
     }
